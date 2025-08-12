@@ -15,6 +15,15 @@ class TotalEmployees extends BaseWidget
                 ->description('All registered employees')
                 ->descriptionIcon('heroicon-o-users')
                 ->color('primary'),
+
+            Stat::make('Active Employees', Employee::where('status', 'active')->count())
+                ->description('All Active Employees')
+                ->descriptionIcon('heroicon-o-users')
+                ->color('success'),
+            Stat::make('Inactive Employees', Employee::where('status', 'inactive')->count())
+                ->description('All Inactive Employees')
+                ->descriptionIcon('heroicon-o-users')
+                ->color('gray'),
         ];
     }
 }

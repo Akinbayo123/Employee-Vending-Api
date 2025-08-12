@@ -15,5 +15,24 @@ class Employee extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    protected static function booted()
+    {
+        static::created(function ($employee) {
+            $employee->update([
+                'balance' => $employee->classification->daily_point_limit ?? 0
+            ]);
+        });
+
+        static::updated(function ($employee) {
+            // Only reset balance if classification changed
+            if ($employee->isDirty('classification_id')) {
+                $employee->updateQuietly([
+                    'balance' => $employee->classification->daily_point_limit ?? 0
+                ]);
+            }
+        });
+    }
+
     protected $guarded = [];
 }

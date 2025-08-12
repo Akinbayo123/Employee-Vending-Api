@@ -35,8 +35,8 @@ class RecentTransactions extends BaseWidget
 
                 Tables\Columns\IconColumn::make('status')
                     ->label('Status')
-                    ->icon(fn(string $state) => $state === 'failed' ? 'heroicon-o-check-circle' : 'heroicon-o-x-circle')
-                    ->color(fn(string $state) => $state === 'sucess' ? 'success' : 'danger'),
+                    ->icon(fn(string $state) => $state === 'failed' ? 'heroicon-o-x-circle' : 'heroicon-o-check-circle')
+                    ->color(fn(string $state) => $state === 'failed' ? 'danger' : 'success'),
                 Tables\Columns\TextColumn::make('transaction_time')
                     ->label('Time')
                     ->since()

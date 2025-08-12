@@ -78,7 +78,7 @@ class VendingApiController extends Controller
             ], 403);
         }
 
-        if ($employee->classification->daily_point_limit < $slot->price) {
+        if ($employee->balance < $slot->price) {
             return response()->json([
                 'message' => 'Insufficient balance.'
             ], 403);
@@ -100,6 +100,6 @@ class VendingApiController extends Controller
         ]);
 
 
-        $employee->classification->decrement('daily_point_limit', $slot->price);
+        $employee->decrement('balance', $slot->price);
     }
 }
